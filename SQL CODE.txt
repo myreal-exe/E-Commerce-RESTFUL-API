@@ -1,0 +1,34 @@
+CREATE TABLE users(
+	user_id SERIAL PRIMARY KEY,
+	username varchar(32) UNIQUE,
+	first_name varchar(20),
+	last_name varchar(20),
+	region varchar(20),
+	SHA256_pw varchar(32 ) NOT NULL 
+	
+);
+ALTER TABLE users
+ADD CONSTRAINT check_min_username_length CHECK (LENGTH(username)>5);
+
+CREATE TABLE products(
+	product_id SERIAL PRIMARY KEY,
+	name varchar(20),
+	price money NOT NULL,
+	description varchar(100)
+	
+);
+
+create table users_cart(
+	user_id int NOT NULL REFERENCES users(user_id),
+	product_id int NOT NULL REFERENCES products(product_id),
+	qty int CHECK (qty>0),
+	PRIMARY KEY(user_id,product_id)
+);
+
+CREATE TABLE orders(
+	order_id SERIAL PRIMARY KEY,
+	order_timestamp timestamp with time zone,
+	total money NOT NULL,
+	status varchar(20) NOT NULL,
+	user_id int REFERENCES users(user_id)
+);
