@@ -21,6 +21,8 @@
   "homepage": "https://github.com/myreal-exe/E-Commerce-RESTFUL-API#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "faker": "^5.5.3",
+    "knex": "^0.95.14",
     "morgan": "^1.10.0",
     "pg": "^8.7.1"
   }
